@@ -534,6 +534,8 @@ class libertyParser():
                     for timingLevelGroupDic in groupDic['group']:
                         timingLevelGroupType = timingLevelGroupDic['type']
                         timingLevelGroupName = timingLevelGroupDic['name']
+                        if 'sigma_type' in timingLevelGroupDic:
+                            timingLevelGroupType = timingLevelGroupType+'_'+timingLevelGroupDic['sigma_type']
                         timingDic['table_type'][timingLevelGroupType] = collections.OrderedDict()
 
                         if timingLevelGroupName != '':
@@ -541,7 +543,6 @@ class libertyParser():
 
                         if 'sigma_type' in timingLevelGroupDic:
                             # 'sigma_type' is only for ocv lib.
-                            timingLevelGroupType = timingLevelGroupType+'_'+timingLevelGroupDic['sigma_type']
                             timingDic['table_type'][timingLevelGroupType]['sigma_type'] = timingLevelGroupDic['sigma_type']
 
                         if 'index_1' in timingLevelGroupDic:
