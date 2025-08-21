@@ -858,8 +858,15 @@ class mainWindow(QMainWindow):
             tmpPinTimingDic['related_pin'][pinTimingRelatedPin]['related_pg_pin'][pinTimingRelatedPgPin]['timing_sense'][pinTimingTimingSense]['timing_type'][pinTimingTimingType]['when'].setdefault(pinTimingWhen, collections.OrderedDict())
             tmpPinTimingDic['related_pin'][pinTimingRelatedPin]['related_pg_pin'][pinTimingRelatedPgPin]['timing_sense'][pinTimingTimingSense]['timing_type'][pinTimingTimingType]['when'][pinTimingWhen].setdefault('table_type', collections.OrderedDict())
 
-            for tableType in pinTimingDic['table_type'].keys():
-                if (tableType == 'cell_rise') or (tableType == 'rise_transition') or (tableType == 'cell_fall') or (tableType == 'fall_transition') or (tableType == 'rise_constraint') or (tableType == 'fall_constraint') or (tableType == 'ocv_sigma_rise_contraint') or (tableType == 'ocv_sigma_fall_contraint') or (tableType == 'ocv_sigma_rise_transition') or (tableType == 'ocv_sigma_fall_transition') or (tableType == 'ocv_sigma_cell_rise') or (tableType == 'ocv_sigma_cell_fall'):
+            #for tableType in pinTimingDic['table_type'].keys():
+            #    if (tableType == 'cell_rise') or (tableType == 'rise_transition') or (tableType == 'cell_fall') or (tableType == 'fall_transition') or (tableType == 'rise_constraint') or (tableType == 'fall_constraint') or (tableType == 'ocv_sigma_rise_contraint') or (tableType == 'ocv_sigma_fall_contraint') or (tableType == 'ocv_sigma_rise_transition') or (tableType == 'ocv_sigma_fall_transition') or (tableType == 'ocv_sigma_cell_rise') or (tableType == 'ocv_sigma_cell_fall'):
+            collected_tables = ['cell_rise', 'ocv_mean_shift_cell_rise', 'ocv_std_dev_cell_rise', 'ocv_skewness_cell_rise', 'ocv_sigma_cell_rise_early', 'ocv_sigma_cell_rise_late', \
+                    'rise_transition', 'ocv_mean_shift_rise_transition', 'ocv_std_dev_rise_transition', 'ocv_skewness_rise_transition', 'ocv_sigma_rise_transition_early', \
+                    'ocv_sigma_rise_transition_late', 'cell_fall', 'ocv_mean_shift_cell_fall', 'ocv_std_dev_cell_fall', 'ocv_skewness_cell_fall', 'ocv_sigma_cell_fall_early', \
+                    'ocv_sigma_cell_fall_late', 'fall_transition', 'ocv_mean_shift_fall_transition', 'ocv_std_dev_fall_transition', 'ocv_skewness_fall_transition', 'ocv_sigma_fall_transition_early', \
+                    'ocv_sigma_fall_transition_late']
+            for tableType in collected_tables:
+                if True:
                     pinTimingTableTypeDic = pinTimingDic['table_type'][tableType]
 
                     if 'index_1' in pinTimingTableTypeDic:
@@ -1799,7 +1806,16 @@ class mainWindow(QMainWindow):
                         if 'timing' in self.timingTabDic[libraryFileName][cellName]['pin'][pinName]:
                             pinTimingTableTypeList = list(set(list(self.timingTabDic[libraryFileName][cellName]['pin'][pinName]['timing']['related_pin'][pinTimingRelatedPin]['related_pg_pin'][pinTimingRelatedPgPin]['timing_sense'][pinTimingTimingSense]['timing_type'][pinTimingTimingType]['when'][pinTimingWhen]['table_type'].keys())))
 
-                    self.timingTabTableTypeCombo.addItems(pinTimingTableTypeList)
+                    collected_tables = ['cell_rise', 'ocv_mean_shift_cell_rise', 'ocv_std_dev_cell_rise', 'ocv_skewness_cell_rise', 'ocv_sigma_cell_rise_early', 'ocv_sigma_cell_rise_late', \
+                        'rise_transition', 'ocv_mean_shift_rise_transition', 'ocv_std_dev_rise_transition', 'ocv_skewness_rise_transition', 'ocv_sigma_rise_transition_early', \
+                        'ocv_sigma_rise_transition_late', 'cell_fall', 'ocv_mean_shift_cell_fall', 'ocv_std_dev_cell_fall', 'ocv_skewness_cell_fall', 'ocv_sigma_cell_fall_early', \
+                        'ocv_sigma_cell_fall_late', 'fall_transition', 'ocv_mean_shift_fall_transition', 'ocv_std_dev_fall_transition', 'ocv_skewness_fall_transition', 'ocv_sigma_fall_transition_early', \
+                        'ocv_sigma_fall_transition_late']
+                    sorted_pinTimingTableTypeList = []
+                    for table in collected_tables:
+                        if table in pinTimingTableTypeList:
+                            sorted_pinTimingTableTypeList.append(table)
+                    self.timingTabTableTypeCombo.addItems(sorted_pinTimingTableTypeList)
                     finish = True
                     break
 

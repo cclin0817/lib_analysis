@@ -541,6 +541,7 @@ class libertyParser():
 
                         if 'sigma_type' in timingLevelGroupDic:
                             # 'sigma_type' is only for ocv lib.
+                            timingLevelGroupType = timingLevelGroupType+'_'+timingLevelGroupDic['sigma_type']
                             timingDic['table_type'][timingLevelGroupType]['sigma_type'] = timingLevelGroupDic['sigma_type']
 
                         if 'index_1' in timingLevelGroupDic:
